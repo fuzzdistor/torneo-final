@@ -1,3 +1,5 @@
+package Utils;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -26,8 +28,11 @@ public class Lector {
 
             // Leo hasta que me quede sin líneas
             int i = 0;
-            while ((linea = bufferedReader.readLine()) != null) {
+            // FIXME
+            linea = bufferedReader.readLine();
+            while (linea != null) {
                 elementos[i] = linea.split(separador);
+                linea = bufferedReader.readLine();
                 i++;
             }
 

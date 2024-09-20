@@ -1,3 +1,4 @@
+package Torneo;
 
 public class Jugador {
 

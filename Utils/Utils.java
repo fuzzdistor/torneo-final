@@ -1,3 +1,8 @@
+package Utils;
+
+import Torneo.Equipo;
+import Torneo.Jugador;
+
 public class Utils {
     /**
      * Cuenta la cantidad de equipos no nulos en un array de jugadores.

@@ -1,3 +1,7 @@
+package Torneo;
+
+import Utils.Parser;
+
 public class Torneo {
     private Equipo[] m_equipos;
     private Jugador[] m_jugadores;

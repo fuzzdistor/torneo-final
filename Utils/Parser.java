@@ -1,3 +1,8 @@
+package Utils;
+
+import Torneo.Equipo;
+import Torneo.Jugador;
+
 public class Parser {
 
     public static Equipo[] parseEquipos(String ruta) {
