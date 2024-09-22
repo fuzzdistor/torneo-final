@@ -86,4 +86,12 @@ public class Jugador {
         }
         return comp;
     }
+
+    public boolean equals(Jugador otro) {
+        return m_nombre.equalsIgnoreCase(otro.m_nombre) 
+            && m_apellido.equalsIgnoreCase(otro.m_apellido)
+            && m_edad == otro.m_edad
+            && m_dni == otro.m_dni
+            && m_camiseta == otro.m_camiseta;
+    }
 }

@@ -24,7 +24,6 @@ public class Equipo {
 
     /**
      * Constructor de la clase Equipo.
-     *
      * @param nombre    el nombre del equipo.
      * @param categoria la categoría del equipo.
      * @implNote el arreglo de jugadores se inicializa con 26 espacios, que es una buena cantidad máxima de jugadores que puede tener un equipo en un torneo.
@@ -42,7 +41,6 @@ public class Equipo {
 
     /**
      * Calcula la cantidad de partidos jugados por el equipo.
-     *
      * @return la cantidad de partidos jugados por el equipo.
      */
     public int getPartidosJugados() {
@@ -51,7 +49,6 @@ public class Equipo {
 
     /**
      * Calcula la diferencia de goles del equipo. La diferencia de goles es la resta de los goles a favor menos los goles en contra.
-     *
      * @return la diferencia de goles del equipo.
      */
     public int getDiferenciaGoles() {
@@ -61,7 +58,6 @@ public class Equipo {
     /**
      * Calcula la cantidad de puntos que tiene el equipo.
      * Los partidos ganados suman 3 puntos, los empatados 1 y los perdidos 0.
-     *
      * @return los puntos del equipo.
      */
     public int getPuntos() {
@@ -70,7 +66,6 @@ public class Equipo {
 
     /**
      * Calcula la edad promedio de los jugadores del equipo de forma recursiva.
-     *
      * @return la edad promedio de los jugadores del equipo o -1 si no hay jugadores registrados.
      */
     public int getEdadPromedio() {
@@ -120,7 +115,6 @@ public class Equipo {
 
     /**
      * Busca los jugadores que superan una edad determinada de forma recursiva.
-     *
      * @param edad    la edad a superar.
      * @param indice  el índice del jugador actual.
      * @param posNull la posición en la que se debe agregar el jugador al arreglo.
@@ -141,7 +135,6 @@ public class Equipo {
     /**
      * Busca el primer jugador que sea menor a una edad determinada de forma recursiva.
      * Si no hay jugadores menores a la edad dada devuelve null.
-     *
      * @param edad la edad tope.
      * @return el primer jugador menor a la edad o null si no encuentra.
      */
@@ -167,7 +160,6 @@ public class Equipo {
 
     /**
      * Devuelve el nombre del equipo.
-     *
      * @return el nombre del equipo.
      */
     public String getNombre() {
@@ -176,7 +168,6 @@ public class Equipo {
 
     /**
      * Devuelve la categoría del equipo.
-     *
      * @return la categoría del equipo.
      */
     public Categoria getCategoria() {
@@ -185,7 +176,6 @@ public class Equipo {
 
     /**
      * Devuelve los jugadores del equipo.
-     *
      * @return los jugadores del equipo.
      */
     public Jugador[] getJugadores() {
@@ -194,7 +184,6 @@ public class Equipo {
 
     /**
      * Devuelve la cantidad de partidos ganados por el equipo.
-     *
      * @return la cantidad de partidos ganados por el equipo.
      */
     public int getGanados() {
@@ -203,7 +192,6 @@ public class Equipo {
 
     /**
      * Devuelve la cantidad de partidos perdidos por el equipo.
-     *
      * @return la cantidad de partidos perdidos por el equipo.
      */
     public int getPerdidos() {
@@ -212,7 +200,6 @@ public class Equipo {
 
     /**
      * Devuelve la cantidad de partidos empatados por el equipo.
-     *
      * @return la cantidad de partidos empatados por el equipo.
      */
     public int getEmpatados() {
@@ -221,7 +208,6 @@ public class Equipo {
 
     /**
      * Devuelve la cantidad de goles a favor del equipo.
-     *
      * @return la cantidad de goles a favor del equipo.
      */
     public int getGolesAFavor() {
@@ -230,7 +216,6 @@ public class Equipo {
 
     /**
      * Devuelve la cantidad de goles en contra del equipo.
-     *
      * @return la cantidad de goles en contra del equipo.
      */
     public int getGolesEnContra() {
@@ -239,7 +224,6 @@ public class Equipo {
 
     /**
      * Chequea la cantidad de miembros del equipo. Asume que no hay espacios vacíos entre elementos.
-     *
      * @return la cantidad de miembros del equipo.
      */
     public int getCantidadJugadores() {
@@ -248,7 +232,6 @@ public class Equipo {
 
     /**
      * Devuelve una cadena con el nombre y la categoría del equipo.
-     *
      * @return el nombre y la categoría del equipo separados por un espacio.
      */
     public String toString() {
@@ -262,6 +245,7 @@ public class Equipo {
      * @return true si se pudo agregar el jugador, false si no hay espacio.
      */
     public boolean addJugador(Jugador jugador) {
+        //TODO: refactorear con la garantia de que el arreglo es compacto
         int cantidad_de_miembros = getCantidadJugadores();
 
         // Si hay menos miembros que espacios en el arreglo, entra un jugador más.
@@ -272,5 +256,97 @@ public class Equipo {
         }
 
         return hay_espacio;
+    }
+
+    /**
+     * Agrega un partido jugado al equipo.
+     *
+     * @param golesAFavor   los goles a favor del equipo.
+     * @param golesEnContra los goles en contra del equipo.
+     */
+    public void addPartido(int golesAFavor, int golesEnContra) {
+        m_golesFavor += golesAFavor;
+        m_golesContra += golesEnContra;
+
+        if (golesAFavor > golesEnContra) {
+            m_ganados++;
+        } else if (golesAFavor < golesEnContra) {
+            m_perdidos++;
+        } else {
+            m_empatados++;
+        }
+    }
+
+
+    /**
+     * Compara dos equipos por puntos o, en caso de un empate, por diferencia de goles.
+     * @param otro el equipo con el que comparar.
+     * @return número negativo si este equipo resulta menor, 0 si tienen la misma cantidad de puntos y diferencia de goles,
+     * y un número positivo si este equipo resulta mayor.
+     */
+    public int compareTo(Equipo otro) {
+        int resultado = getPuntos() - otro.getPuntos();
+        if (resultado == 0) {
+            if (getDiferenciaGoles() != otro.getDiferenciaGoles()) {
+                resultado = getDiferenciaGoles() - otro.getDiferenciaGoles();
+            }
+        }
+
+        return resultado;
+    }
+
+    /**
+     * Busca al jugador con número de camiseta igual al dado por parámetro y devuelve el índice en el que se encuentra
+     * o -1 si no lo encontró.
+     * @param camiseta número de la camiseta que se busca.
+     * @return índice del jugador al que le corresponde la camiseta o -1 si no fue encontrado.
+    */
+    public int indexOfJugador(int camiseta) {
+        int i = 0;
+        while (i < m_jugadores.length) {
+            if (m_jugadores[i] != null && m_jugadores[i].getCamiseta() == camiseta)
+                break;
+            i++;
+        }
+
+        // si me pasé del rango es porque no encontré al jugador. Devuelvo -1
+        if (i >= m_jugadores.length)
+            i = -1;
+
+        return i;
+    }
+
+    public Jugador findJugador(int camiseta) {
+        Jugador jugador = null;
+        int i = indexOfJugador(camiseta);
+        if (i > 0)
+            jugador = m_jugadores[i];
+
+        return jugador;
+    }
+
+    public void addGol(Jugador jugador) {
+        jugador.addGol();
+        m_golesFavor++;
+    }
+
+    public void addPartidoGanado() {
+        m_ganados++;
+    }
+
+    public void addPartidoPerdido() {
+        m_perdidos++;
+    }
+
+    public void addPartidoEmpatado() {
+        m_empatados++;
+    }
+
+    public void addGolesAFavor(int goles) {
+        m_golesFavor += goles;
+    }
+
+    public void addGolesEnContra(int goles) {
+        m_golesContra += goles;
     }
 }

@@ -1,13 +1,29 @@
-package Utils;
+package Torneo;
 
-import Torneo.Equipo;
-import Torneo.Jugador;
+import Utils.Lector;
+import Utils.Utils;
 
 public class Parser {
+    public static String[][] parseContenidos(String contenidos, String separador) {
+        String[] lineas = contenidos.split("\n");
+        String[][] datos = new String[lineas.length][2];
+
+        for (int i = 0; i < lineas.length; i++) {
+            datos[i] = lineas[i].split(separador);
+        }
+        return datos;
+    }
 
     public static Equipo[] parseEquipos(String ruta) {
-        String[][] datos = Lector.getContenidos(ruta);
+        return parseEquipos(ruta, ";");
+    }
+
+    public static Equipo[] parseEquipos(String ruta, String separador) {
+        String contenidos = Lector.getContenidos(ruta);
+        String[][] datos = parseContenidos(contenidos, separador);
+
         Equipo[] equipos = new Equipo[datos.length];
+
         try {
             for (int i = 0; i < datos.length; i++) {
                 equipos[i] = new Equipo(datos[i][0], Equipo.Categoria.valueOf(datos[i][1]));
@@ -20,7 +36,12 @@ public class Parser {
     }
 
     public static Jugador[] parseJugadores(String ruta, Equipo[] equipos) {
-        String[][] datos = Lector.getContenidos(ruta);
+        return parseJugadores(ruta, ";", equipos);
+    }
+
+    public static Jugador[] parseJugadores(String ruta, String separador, Equipo[] equipos) {
+        String contenidos = Lector.getContenidos(ruta);
+        String[][] datos = parseContenidos(contenidos, separador);
         Jugador[] jugadores = new Jugador[datos.length];
 
         for (int i = 0; i < datos.length; i++) {
