@@ -231,7 +231,8 @@ public class UI {
             System.out.printf("%s, %s%n", jugadores[i].getApellido(), jugadores[i].getNombre());
         }
 
-        System.out.printf("%nTiempo que tomó el ordenamiento: %dns.", tiempoFin.getNano() - tiempoInicio.getNano());
+        long nano = tiempoFin.getNano() - tiempoInicio.getNano();
+        System.out.printf("%nTiempo que tomó el ordenamiento: %d.%d microsegundos.", nano/1000, nano%1000);
     }
 
     private void printTablaGoleadores() {
@@ -468,6 +469,7 @@ public class UI {
                     Jugador jugador = partido.local.findJugador(camiseta);
                     if (jugador != null) {
                         partido.local.addGol(jugador);
+                        partido.visitante.addGolesEnContra(1);
                         partido.goles_local++;
                         partido.goleadores_local[indiceGoleador] = jugador;
                         indiceGoleador++;
@@ -490,6 +492,7 @@ public class UI {
                     Jugador jugador = partido.visitante.findJugador(camiseta);
                     if (jugador != null) {
                         partido.visitante.addGol(jugador);
+                        partido.local.addGolesEnContra(1);
                         partido.goles_visitante++;
                         partido.goleadores_visitante[indiceGoleador] = jugador;
                         indiceGoleador++;

@@ -285,7 +285,7 @@ public class Equipo {
 
     public void addGol(Jugador jugador) {
         jugador.addGol();
-        m_golesFavor++;
+        addGolesAFavor(1);
     }
 
     public void addPartidoGanado() {
