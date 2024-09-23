@@ -90,47 +90,6 @@ public class Equipo {
         return suma;
     }
 
-    /**
-     * Busca los jugadores que superan la edad promedio por una cantidad de años determinada de forma recursiva.
-     *
-     * @param anios los años por los que superan la edad promedio.
-     */
-    public Jugador[] getJugadoresQueSuperanEdadPromedioPor(int anios) {
-        int edadPromedio = getEdadPromedio();
-        Jugador[] aux = new Jugador[getCantidadJugadores()];
-
-        // Si no hubo error al calcular la edad promedio, busco los jugadores que superan la edad promedio.
-        if (edadPromedio != -1) {
-            getJugadoresQueSuperan(edadPromedio + anios, 0, 0, aux);
-        }
-
-        Jugador[] jugadoresQueSuperan = new Jugador[Utils.countNoNulos(aux)];
-
-        for (int i = 0; i < jugadoresQueSuperan.length; i++) {
-            jugadoresQueSuperan[i] = aux[i];
-        }
-
-        return jugadoresQueSuperan;
-    }
-
-    /**
-     * Busca los jugadores que superan una edad determinada de forma recursiva.
-     * @param edad    la edad a superar.
-     * @param indice  el índice del jugador actual.
-     * @param posNull la posición en la que se debe agregar el jugador al arreglo.
-     * @param superan el arreglo donde se guardan los jugadores que superan la edad (ODIO LOS OUT PARAMS 😭).
-     */
-    private void getJugadoresQueSuperan(int edad, int indice, int posNull, Jugador[] superan) {
-        if (indice < getCantidadJugadores()) {
-            // Si la edad del jugador actual supera la edad, lo agrego al arreglo.
-            if (m_jugadores[indice].getEdad() > edad) {
-                superan[posNull] = m_jugadores[indice];
-                getJugadoresQueSuperan(edad, indice + 1, posNull + 1, superan);
-            } else {
-                getJugadoresQueSuperan(edad, indice + 1, posNull, superan);
-            }
-        }
-    }
 
     /**
      * Busca el primer jugador que sea menor a una edad determinada de forma recursiva.
@@ -245,7 +204,6 @@ public class Equipo {
      * @return true si se pudo agregar el jugador, false si no hay espacio.
      */
     public boolean addJugador(Jugador jugador) {
-        //TODO: refactorear con la garantia de que el arreglo es compacto
         int cantidad_de_miembros = getCantidadJugadores();
 
         // Si hay menos miembros que espacios en el arreglo, entra un jugador más.
@@ -319,7 +277,7 @@ public class Equipo {
     public Jugador findJugador(int camiseta) {
         Jugador jugador = null;
         int i = indexOfJugador(camiseta);
-        if (i > 0)
+        if (i >= 0)
             jugador = m_jugadores[i];
 
         return jugador;

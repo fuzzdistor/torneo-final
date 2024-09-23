@@ -7,6 +7,7 @@ import Torneo.Torneo;
 public class Utils {
     /**
      * Cuenta la cantidad de equipos no nulos en un array de jugadores.
+     *
      * @param equipos Array de equipos. Asume que no es nulo.
      * @return Cantidad de equipos no nulos.
      * @implNote Asume que no hay espacios vacíos entre elementos.
@@ -20,6 +21,19 @@ public class Utils {
 
         return count;
     }
+
+    public static boolean hasJugador(Jugador[] jugadores, Jugador j) {
+        boolean tiene = false;
+        for (int i = 0; i < jugadores.length; i++) {
+            if (jugadores[i] != null && jugadores[i].equals(j)) {
+                tiene = true;
+                break;
+            }
+        }
+
+        return tiene;
+    }
+
 
     public static int countNoNulos(Torneo.Partido[][] fechas) {
         int count = 0;
@@ -48,6 +62,19 @@ public class Utils {
         return count;
     }
 
+    public static boolean copyArrayEn(Jugador[] lhs, Jugador[] rhs) {
+        boolean exito = false;
+        if (lhs.length < rhs.length) {
+            for (int i = 0; i < lhs.length; i++) {
+                rhs[i] = lhs[i];
+            }
+
+            exito = true;
+        }
+
+        return exito;
+    }
+
     public static Equipo findEquipo(Equipo[] equipos, String nombre) {
         Equipo equipo = null;
         int i = 0;
@@ -63,12 +90,75 @@ public class Utils {
     }
 
     // intercambia los valores de dos índices de un arreglo
+    public static void swap(Jugador[] arr, int p1, int p2) {
+        Jugador temp = arr[p1];
+        arr[p1] = arr[p2];
+        arr[p2] = temp;
+    }
+
     public static void swap(Equipo[] arr, int p1, int p2) {
         Equipo temp = arr[p1];
         arr[p1] = arr[p2];
         arr[p2] = temp;
     }
 
+    // selection sort
+    public static void sortJugadoresPorApellidoNombreSelection(Jugador[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            int indice_del_menor = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[indice_del_menor].compareTo(arr[j]) > 0) {
+                    indice_del_menor = j;
+                }
+            }
+            swap(arr, i, indice_del_menor);
+        }
+    }
+
+    public static void sortJugadoresPorApellidoNombreQuick(Jugador[] arr) {
+        quickSort(arr, 0, arr.length - 1);
+    }
+
+    public static void mix(Jugador[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            int randomIndex = random(0, arr.length - 1);
+            swap(arr, i, randomIndex);
+        }
+    }
+
+    private static void quickSort(Jugador[] arr, int izq, int der) {
+        if (izq < der) {
+            int pivote = particion(arr, izq, der);
+            quickSort(arr, izq, pivote - 1);
+            quickSort(arr, pivote + 1, der);
+        }
+    }
+
+    private static int particion(Jugador[] arr, int izq, int der) {
+        Jugador pivote = arr[der];
+        int i = izq - 1;
+        for (int j = izq; j < der; j++) {
+            if (arr[j].compareTo(pivote) < 0) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, der);
+        return i + 1;
+    }
+
+    // selection sort
+    public static void sortJugadorPorGoles(Jugador[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            int indice_del_menor = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[indice_del_menor].getGoles() < arr[j].getGoles()) {
+                    indice_del_menor = j;
+                }
+            }
+            swap(arr, i, indice_del_menor);
+        }
+    }
 
     public static void selectionSort(Equipo[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {

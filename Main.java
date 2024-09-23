@@ -1,23 +1,13 @@
 import Torneo.Torneo;
 import Torneo.UI;
-import Utils.Utils;
 
 public class Main {
-
     public static void main(String[] args) {
+        // creo el torneo con los archivos de equipos y jugadores
         Torneo torneo = new Torneo("Equipos.txt", "Jugadores.txt");
-        for (int i = 0; i < torneo.getEquipos().length; i++) {
-            torneo.getEquipos()[i].addPartido(i, 4);
-        }
 
-        UI.run(torneo);
-
-
-        UI.printLeaderBoard(torneo);
-
-        torneo.createFechas();
-
-        UI.printFechas(torneo);
-        UI.printFecha(torneo, 1);
+        // corro el programa
+        UI ui = new UI(torneo);
+        ui.run();
     }
 }

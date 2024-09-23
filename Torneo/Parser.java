@@ -54,7 +54,8 @@ public class Parser {
             Equipo equipo = Utils.findEquipo(equipos, datos[i][5]);
 
             jugadores[i] = new Jugador(apellido, nombre, edad, dni, camiseta, equipo);
-            jugadores[i].setEquipo(equipo);
+            equipo.addJugador(jugadores[i]);
+
         }
 
         return jugadores;

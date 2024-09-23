@@ -11,8 +11,8 @@ public class Jugador {
     private int m_goles;
 
     public Jugador(String apellido, String nombre, int edad, int dni, int camiseta, Equipo equipo) {
-        m_nombre = apellido;
-        m_apellido = nombre;
+        m_apellido = apellido;
+        m_nombre = nombre;
         m_edad = edad;
         m_dni = dni;
         m_camiseta = camiseta;
@@ -63,12 +63,8 @@ public class Jugador {
     }
 
     public String toString() {
-        return m_nombre + " "
-                + m_apellido + " "
-                + m_edad + " "
-                + m_dni + " "
-                + m_camiseta + " "
-                + m_equipo;
+        return m_nombre + ", "
+                + m_apellido;
     }
 
     public void setGoles(int goles) {
@@ -80,18 +76,14 @@ public class Jugador {
     }
 
     public int compareTo(Jugador otro) {
-        int comp = m_nombre.compareToIgnoreCase(otro.m_nombre);
+        int comp = m_apellido.compareToIgnoreCase(otro.m_apellido);
         if (comp == 0) {
-            comp = m_apellido.compareToIgnoreCase(otro.m_apellido);
+            comp = m_nombre.compareToIgnoreCase(otro.m_nombre);
         }
         return comp;
     }
 
     public boolean equals(Jugador otro) {
-        return m_nombre.equalsIgnoreCase(otro.m_nombre) 
-            && m_apellido.equalsIgnoreCase(otro.m_apellido)
-            && m_edad == otro.m_edad
-            && m_dni == otro.m_dni
-            && m_camiseta == otro.m_camiseta;
+        return m_dni == otro.m_dni;
     }
 }
