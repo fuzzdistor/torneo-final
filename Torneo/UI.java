@@ -380,13 +380,13 @@ public class UI {
         System.out.println("Ingrese el equipo al que pertenece el jugador:");
         final String nombre_equipo = m_sc.nextLine();
 
-        Jugador jugador = new Jugador(apellido, nombre, edad, dni, camiseta);
-
         Equipo equipo = Utils.findEquipo(m_torneo.getEquipos(), nombre_equipo);
 
         if (equipo == null) {
             System.out.println("No se encontró el equipo.");
         } else {
+            Jugador jugador = new Jugador(apellido, nombre, edad, dni, camiseta);
+
             if (m_torneo.addJugadorAEquipo(jugador, equipo)) {
                 System.out.println("Se agregó el jugador al equipo.");
             } else {

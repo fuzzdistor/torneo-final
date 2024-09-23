@@ -211,6 +211,7 @@ public class Equipo {
 
         if (hay_espacio) {
             m_jugadores[cantidad_de_miembros] = jugador;
+            jugador.setEquipo(this);
         }
 
         return hay_espacio;
