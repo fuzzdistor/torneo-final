@@ -318,7 +318,7 @@ public class UI {
 
         return opcion;
     }
-//TODO ARREGLAR GOLES A FAVOR QUE CREO QUE SE ESTAN REGISTRANDO DOS VECES
+
     private Opcion pickOpciones() {
         Opcion opcion = null;
 
@@ -511,10 +511,6 @@ public class UI {
                 partido.visitante.addPartidoEmpatado();
             }
 
-            partido.local.addGolesAFavor(partido.goles_local);
-            partido.local.addGolesEnContra(partido.goles_visitante);
-            partido.visitante.addGolesAFavor(partido.goles_visitante);
-            partido.visitante.addGolesEnContra(partido.goles_local);
             partido.jugado = true;
         }
     }
