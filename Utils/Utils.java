@@ -22,6 +22,37 @@ public class Utils {
         return count;
     }
 
+    public static Jugador[] generarJugadoresRandom(int n) {
+        Jugador[] ju = new Jugador[n];
+
+        for (int i = 0; i < n; i++) {
+            //esto es para generar un nombre y apellido cualquiera
+            String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            StringBuilder sb = new StringBuilder(20);
+            String apellido;
+            String nombre;
+
+            //genero un apellido cualquiera
+            sb.setLength(0);
+            for (int j = 0; j < (int) (Math.random() * 6) + 5; j++) {
+                sb.append(chars.charAt((int) (Math.random() * chars.length())));
+            }
+            apellido = sb.toString();
+
+            //genero un nombre cualquiera
+            sb.setLength(0);
+            for (int j = 0; j < (int) (Math.random() * 6) + 5; j++) {
+                sb.append(chars.charAt((int) (Math.random() * chars.length())));
+            }
+            nombre = sb.toString();
+
+            //creo el jugador
+            ju[i] = new Jugador(apellido, nombre, 1, 1, 1);
+        }
+
+        return ju;
+    }
+
     public static boolean hasJugador(Jugador[] jugadores, Jugador j) {
         boolean tiene = false;
         for (int i = 0; i < jugadores.length; i++) {
